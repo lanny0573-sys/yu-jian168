@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玉見秋菊 - 來自土地的溫暖相遇</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Noto+Serif+TC:wght@400;700&display=swap' );
+
+        :root {
+            --primary-color: #E6A21B; /* 玉米金黃 */
+            --bg-color: #FDFBF7; /* 杭菊象牙白 */
+            --text-main: #4A3E3D; /* 大地深咖色 */
+            --text-light: #7A6F6E; /* 文字次色 */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8; /* 稍微增加行高，讓閱讀更舒適 */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* 導覽列 */
+        header {
+            background-color: #fff;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 首頁大圖區 */
+        .hero {
+            background: linear-gradient(rgba(74, 62, 61, 0.4), rgba(74, 62, 61, 0.4)), url('images/hero.jpg') center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #C98A13;
+        }
+
+        /* 品牌故事 */
+        .story {
+            max-width: 800px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .story h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .story p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* 產品區塊 */
+        .products {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 48%;
+            min-width: 300px;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 30px;
+            flex-grow: 1; /* 讓內容自動撐滿高度 */
+        }
+
+        /* 產品標題與副標題排版優化 */
+        .product-info .product-name {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        
+        .product-info .sub-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 25px 0 10px 0;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+
+        .product-info p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* 特色列表排版優化 */
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 15px;
+        }
+
+        .feature-list li {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* 頁尾 */
+        footer {
+            background-color: var(--text-main);
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            <!-- 這裡我幫您把 height 改成了 80px，您也可以根據喜好改成 70px 或 90px -->
+            <img src="images/yu-logo (2).png" alt="玉見秋菊" style="height: 70px; width: auto;">
+        </a>
+
+        <nav>
+            <a href="#">品牌故事</a>
+            <a href="#shop">當季嚴選</a> 
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>來自土地的溫暖相遇</h1>
+        <p>秋日裡的金黃與純白，為您遞上最純粹的療癒時光</p>
+    </section>
+
+    <section class="story">
+        <h2>品牌理念</h2>
+        <p>每當秋風輕拂，田野間便會染上一片溫暖的金黃與純潔的雪白。</p>
+        <p>「玉見秋菊」誕生於對土地的敬意與對自然純粹的追求。我們堅持友善農作，讓每一穗玉米都在充足的日照下成長得飽滿鮮甜，讓每一朵杭菊都在清新的晨露中綻放淡雅幽香。</p>
+        <p>從產地到餐桌，我們沒有繁複的加工，只有對無毒與新鮮的堅持。希望您能在這裡，遇見秋日裡最純粹的療癒時光。</p>
+    </section>
+
+    <section class="products" id="shop">
+        <h2>當季嚴選</h2>
+        <div class="product-grid">
+            <!-- 產品一：玉米 -->
+            <div class="product-card">
+                <img src="images/corn.jpg" alt="新鮮水果玉米" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-name">【產地直送】朝露鮮採水果玉米</h3>
+                    <p>友善農作，無農藥殘留。清晨人工採收，鎖住最極致的鮮甜。可直接生食，爽脆多汁，是全家人最健康的天然零嘴。</p>
+                    
+                    <h3 class="sub-title">鮮享大地：無毒生鮮玉米</h3>
+                    <p>我們深信，大自然是最好的調味師。</p>
+                    
+                    <ul class="feature-list">
+                        <li><strong>日光熟成：</strong>讓每一穗玉米都在充足的日照下，自然孕育出飽滿與鮮甜。</li>
+                        <li><strong>產地直送：</strong>友善農作減去不必要的化學藥劑，清晨採收、新鮮直送，保留最天然的爽脆與多汁。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 產品二：杭菊 -->
+            <div class="product-card">
+                <img src="images/flower.jpg" alt="嚴選白杭菊" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-name">【秋日療癒】無硫烘焙嚴選白杭菊</h3>
+                    <p>拒絕化學硫燻，保留杭菊最純粹的清香。朵朵完整，溫潤回甘，為忙碌的您隨時遞上一杯舒壓的好茶。</p>
+                    
+                    <h3 class="sub-title">慢活茶香：手摘無毒杭菊茶</h3>
+                    <p>將秋天最美的容顏，封存在一杯茶香裡。</p>
+                    
+                    <ul class="feature-list">
+                        <li><strong>晨露採收：</strong>堅持在清新的晨露中，由農人手工摘採最精華的盛開花朵。</li>
+                        <li><strong>淡雅幽香：</strong>無添加、無硫化烘焙，完整保留杭菊原有的清甜與溫潤，為忙碌的日常注入一份溫暖與平靜。</li>
+                    </ul>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 玉見秋菊 版權所有. | 友善土地・自然無毒</p>
+        <!-- 您也可以在這裡補充聯絡方式，例如： -->
+        <!-- <p style="margin-top: 10px;">聯絡我們：yujian@example.com | LINE客服：@yujian</p> -->
+    </footer>
+
+</body>
+</html>
