@@ -4,209 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>玉見秋菊 - 來自土地的溫暖相遇</title>
+    <meta name="description" content="玉見秋菊農場自產杭菊與超甜玉米,依產期採收、產地直送,可線上訂購。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Noto+Serif+TC:wght@400;700&display=swap' );
-
         :root {
-            --primary-color: #E6A21B; /* 玉米金黃 */
-            --bg-color: #FDFBF7; /* 杭菊象牙白 */
-            --text-main: #4A3E3D; /* 大地深咖色 */
-            --text-light: #7A6F6E; /* 文字次色 */
+            --primary-color: #E6A21B;   /* 玉米金黃 */
+            --primary-dark: #C98A13;    /* 按鈕 hover */
+            --accent-text: #9A6A10;     /* 金褐色文字(對比度足夠) */
+            --bg-color: #FDFBF7;        /* 杭菊象牙白 */
+            --surface: #FFFFFF;
+            --text-main: #4A3E3D;       /* 大地深咖色 */
+            --text-light: #6B6060;      /* 文字次色(比原版略深,提高可讀性) */
+            --line: #E9E2D6;
+            --focus: #1F6FEB;
+            --ph-bg: #FFF1A8;
+            --ph-ink: #5A4300;
+            color-scheme: light;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: 'Noto Sans TC', sans-serif;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.8; /* 稍微增加行高，讓閱讀更舒適 */
+            line-height: 1.8;
+            font-size: 1rem;
         }
 
-        h1, h2, h3 {
-            font-family: 'Noto Serif TC', serif;
-        }
+        h1, h2, h3 { font-family: 'Noto Serif TC', 'Songti TC', serif; line-height: 1.4; }
+        img { max-width: 100%; display: block; }
+        :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
 
-        /* 導覽列 */
+        /* 待填資料標記:填完後把 class="ph" 整個移除即可 */
+        .ph { background: var(--ph-bg); color: var(--ph-ink); padding: 0 .25em; border-radius: 3px; }
+
+        .container { width: min(1100px, 100% - 2.5rem); margin-inline: auto; }
+
+        /* 導覽列(各尺寸外觀一致,小螢幕時導覽換到第二排) */
         header {
             background-color: #fff;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
+            padding-top: env(safe-area-inset-top, 0px);
         }
-
-        .logo {
+        header .container {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            text-decoration: none;
+            flex-wrap: wrap;
+            gap: .25rem 1.5rem;
+            padding-block: .6rem;
         }
-
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { height: clamp(44px, 9vw, 64px); width: auto; }
+        nav { display: flex; flex-wrap: wrap; gap: 0 clamp(1rem, 3vw, 1.9rem); }
         nav a {
             text-decoration: none;
             color: var(--text-main);
-            margin-left: 30px;
             font-weight: 500;
-            transition: color 0.3s;
+            padding: .5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: color .3s, border-color .3s;
         }
-
-        nav a:hover {
-            color: var(--primary-color);
-        }
+        nav a:hover { color: var(--accent-text); border-bottom-color: var(--primary-color); }
 
         /* 首頁大圖區 */
         .hero {
-            background: linear-gradient(rgba(74, 62, 61, 0.4), rgba(74, 62, 61, 0.4)), url('images/hero.jpg') center/cover;
-            height: 60vh;
+            background:
+                linear-gradient(rgba(74, 62, 61, 0.45), rgba(74, 62, 61, 0.45)),
+                url('images/hero.jpg') center/cover no-repeat,
+                #6b5a55;
+            min-height: clamp(320px, 55vh, 560px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: #fff;
-            padding: 0 20px;
+            padding: 3rem 1.25rem;
         }
-
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
+            font-size: clamp(2rem, 6vw, 3.25rem);
+            margin-bottom: .9rem;
+            letter-spacing: .08em;
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
+        .hero p { font-size: clamp(1rem, 2.6vw, 1.25rem); margin-bottom: 2rem; max-width: 30em; }
 
         .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
             background-color: var(--primary-color);
-            color: #fff;
-            padding: 12px 30px;
+            color: #3A2A00;            /* 深色字,金色底對比度足夠 */
+            padding: .65rem 1.9rem;
             text-decoration: none;
+            border: 2px solid var(--primary-color);
             border-radius: 30px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color .3s, border-color .3s;
         }
+        .btn:hover { background-color: var(--primary-dark); border-color: var(--primary-dark); color: #fff; }
+        .btn.ghost { background: transparent; color: var(--text-main); border-color: var(--text-main); }
+        .btn.ghost:hover { background: var(--text-main); border-color: var(--text-main); color: #fff; }
+        .btn[disabled] { opacity: .6; cursor: wait; }
 
-        .btn:hover {
-            background-color: #C98A13;
-        }
+        section { padding-block: clamp(2.5rem, 7vw, 5rem); }
+        .section-title { text-align: center; font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 2.25rem; }
 
         /* 品牌故事 */
-        .story {
-            max-width: 800px;
-            margin: 80px auto;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .story h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--primary-color);
-        }
-
-        .story p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
+        .story { text-align: center; }
+        .story .inner { max-width: 800px; margin-inline: auto; padding-inline: 1.25rem; }
+        .story h2 { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: 1.5rem; color: var(--accent-text); }
+        .story p { font-size: clamp(1rem, 2.4vw, 1.1rem); color: var(--text-light); margin-bottom: 1.25rem; }
 
         /* 產品區塊 */
-        .products {
-            max-width: 1100px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
-        }
-
-        .products h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-        }
-
         .product-grid {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+            gap: 1.9rem;
         }
-
         .product-card {
-            background: #fff;
+            background: var(--surface);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            width: 48%;
-            min-width: 300px;
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
             display: flex;
             flex-direction: column;
         }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
         .product-img {
-            height: 300px;
             width: 100%;
+            aspect-ratio: 4 / 3;
             object-fit: cover;
+            background: #efe8da;
         }
+        .product-info { padding: clamp(1.25rem, 3vw, 1.9rem); display: flex; flex-direction: column; flex-grow: 1; }
+        .product-name { font-size: clamp(1.2rem, 3vw, 1.4rem); margin-bottom: .6rem; }
+        .product-info p { color: var(--text-light); margin-bottom: 1rem; }
 
-        .product-info {
-            padding: 30px;
-            flex-grow: 1; /* 讓內容自動撐滿高度 */
-        }
-
-        /* 產品標題與副標題排版優化 */
-        .product-info .product-name {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-        
-        .product-info .sub-title {
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            margin: 25px 0 10px 0;
-            border-bottom: 1px dashed #eee;
-            padding-bottom: 5px;
-        }
-
-        .product-info p {
-            color: var(--text-light);
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        /* 特色列表排版優化 */
-        .feature-list {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 15px;
-        }
-
-        .feature-list li {
-            color: var(--text-light);
-            font-size: 1rem;
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-
+        .feature-list { list-style: none; margin-bottom: 1rem; }
+        .feature-list li { color: var(--text-light); margin-bottom: .6rem; padding-left: 1.25rem; position: relative; }
         .feature-list li::before {
             content: "•";
             color: var(--primary-color);
@@ -217,81 +167,444 @@
             top: -2px;
         }
 
+        dl.facts {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: .5rem 1.1rem;
+            border-top: 1px dashed #d9d0c0;
+            padding-top: 1rem;
+            margin-bottom: 1.4rem;
+        }
+        dl.facts dt { color: var(--accent-text); font-weight: 700; }
+        dl.facts dd { color: var(--text-main); }
+        .product-info .btn { margin-top: auto; align-self: flex-start; }
+
+        /* 產期 */
+        .season { background: var(--surface); border-block: 1px solid var(--line); }
+        .cal {
+            display: grid;
+            grid-template-columns: clamp(4.75rem, 18vw, 7rem) repeat(12, minmax(0, 1fr));
+            row-gap: .7rem;
+            align-items: center;
+        }
+        .cal .m {
+            text-align: center;
+            font-size: clamp(.7rem, 2.2vw, .9rem);
+            color: var(--text-light);
+            padding-bottom: .4rem;
+            border-bottom: 1px solid var(--line);
+        }
+        .cal .blank { border-bottom: 1px solid var(--line); }
+        .cal .label { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: clamp(.95rem, 2.6vw, 1.1rem); }
+        .cal .bar { height: 1.9rem; border-radius: 999px; }
+        .cal .bar.mum { background: #F2CF5A; }
+        .cal .bar.corn { background: #6E8F5B; }
+        .legend { margin-top: 1.25rem; color: var(--text-light); font-size: .95rem; }
+        .legend li { list-style: none; }
+
+        /* 訂購 */
+        .checkout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+            gap: 1.9rem;
+            align-items: start;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: clamp(1.25rem, 3vw, 2rem);
+        }
+        .card h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .line-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: .5rem 1rem;
+            align-items: center;
+            padding-block: 1rem;
+            border-top: 1px solid var(--line);
+        }
+        .line-item:first-of-type { border-top: 0; padding-top: 0; }
+        .line-item .nm { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: 1.15rem; }
+        .line-item .pr { color: var(--text-light); font-size: .95rem; }
+        .stepper { display: inline-flex; align-items: center; border: 2px solid var(--text-main); border-radius: 999px; }
+        .stepper button {
+            width: 2.9rem; height: 2.9rem;
+            border: 0; background: transparent; color: var(--text-main);
+            font: inherit; font-size: 1.4rem; line-height: 1; cursor: pointer; border-radius: 999px;
+        }
+        .stepper button:hover { background: #F6DD8D; }
+        .stepper output { min-width: 2.25rem; text-align: center; font-weight: 700; }
+        .total {
+            margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--text-main);
+            display: flex; justify-content: space-between; align-items: baseline; gap: .5rem 1rem; flex-wrap: wrap;
+        }
+        .total strong { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; }
+        .total small { color: var(--text-light); width: 100%; }
+
+        .field { display: grid; gap: .35rem; margin-bottom: 1rem; }
+        .field label { font-weight: 500; }
+        .field input, .field textarea {
+            width: 100%;
+            font: inherit;
+            font-size: 1rem;            /* 16px,避免 iPhone 自動放大 */
+            color: var(--text-main);
+            background: var(--bg-color);
+            border: 1.5px solid #d9d0c0;
+            border-radius: 10px;
+            padding: .7rem .9rem;
+        }
+        .field input:focus, .field textarea:focus { border-color: var(--accent-text); }
+        .preview { min-height: 11rem; resize: vertical; line-height: 1.7; font-size: .95rem; }
+        .actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+        .msg { margin-top: .9rem; min-height: 1.6em; font-weight: 500; }
+        .msg.err { color: #B3261E; }
+        .msg.ok { color: #2E6B3A; }
+        .contact-line { margin-top: 2rem; color: var(--text-light); text-align: center; }
+
         /* 頁尾 */
         footer {
             background-color: var(--text-main);
             color: #fff;
             text-align: center;
-            padding: 30px 20px;
-            font-size: 0.9rem;
+            padding: 2rem 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+            font-size: .9rem;
+        }
+        footer p + p { margin-top: .5rem; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo">
-            <!-- 這裡我幫您把 height 改成了 80px，您也可以根據喜好改成 70px 或 90px -->
-            <img src="images/yu-logo (2).png" alt="玉見秋菊" style="height: 70px; width: auto;">
-        </a>
+        <div class="container">
+            <a href="#top" class="logo">
+                <!-- 請把 logo 檔名改成 yu-logo.png(原檔名有空格與括號,放到網站上容易讀不到) -->
+                <img src="images/yu-logo.png" alt="玉見秋菊">
+            </a>
+            <nav aria-label="主選單">
+                <a href="#shop">產品</a>
+                <a href="#season">產期</a>
+                <a href="#order">訂購</a>
+            </nav>
+        </div>
     </header>
 
-    <section class="hero">
-        <h1>來自土地的溫暖相遇</h1>
-        <p>秋日裡的金黃與純白，為您遞上最純粹的療癒時光</p>
-    </section>
+    <main id="top">
+        <section class="hero" style="padding-block: 3rem;">
+            <h1>來自土地的溫暖相遇</h1>
+            <p>秋日裡的金黃與純白,為您遞上最純粹的療癒時光</p>
+            <a class="btn" href="#order">線上訂購</a>
+        </section>
 
-    <section class="story">
-        <h2>垚哥理念</h2>
-        <p>每當秋風輕拂，田野間便會染上一片溫暖的金黃與純潔的雪白。</p>
-        <p>「玉見秋菊」誕生於對土地的敬意與對自然純粹的追求。我們堅持友善農作，讓每一穗玉米都在充足的日照下成長得飽滿鮮甜，讓每一朵杭菊都在清新的晨露中綻放淡雅幽香。</p>
-        <p>從產地到餐桌，我們沒有繁複的加工，只有對無毒與新鮮的堅持。希望您能在這裡，遇見秋日裡最純粹的療癒時光。</p>
-    </section>
+        <section class="story">
+            <div class="inner">
+                <h2>垚哥理念</h2>
+                <p>每當秋風輕拂,田野間便會染上一片溫暖的金黃與純潔的雪白。</p>
+                <p>「玉見秋菊」誕生於對土地的敬意與對自然純粹的追求。我們自己種、自己採,讓玉米在充足的日照下成長得飽滿鮮甜,讓杭菊在清晨綻放時由農人親手摘下。</p>
+                <p>從產地到餐桌,我們盡量減少繁複的加工,只想把新鮮與誠意送到您手上。希望您能在這裡,遇見秋日裡最純粹的療癒時光。</p>
+                <!-- 提醒:原文的「無毒」「無農藥殘留」「無添加」「無硫烘焙」已改成實際做法的描述。
+                     若有檢驗報告、產銷履歷或友善耕作登錄等佐證,可以再補上對應說明。 -->
+            </div>
+        </section>
 
-    <section class="products" id="shop">
-        <h2>當季嚴選</h2>
-        <div class="product-grid">
-            <!-- 產品一：玉米 -->
-            <div class="product-card">
-                <img src="images/corn.jpg" alt="新鮮水果玉米" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-name">【產地直送】朝露鮮採水果玉米</h3>
-                    <p>友善農作，無農藥殘留。清晨人工採收，鎖住最極致的鮮甜。可直接生食，爽脆多汁，是全家人最健康的天然零嘴。</p>
-                    
-                    <h3 class="sub-title">鮮享大地：無毒生鮮玉米</h3>
-                    <p>我們深信，大自然是最好的調味師。</p>
-                    
-                    <ul class="feature-list">
-                        <li><strong>日光熟成：</strong>讓每一穗玉米都在充足的日照下，自然孕育出飽滿與鮮甜。</li>
-                        <li><strong>產地直送：</strong>友善農作減去不必要的化學藥劑，清晨採收、新鮮直送，保留最天然的爽脆與多汁。</li>
-                    </ul>
+        <section class="products" id="shop" style="padding-top: 0;">
+            <div class="container">
+                <h2 class="section-title">當季嚴選</h2>
+                <div class="product-grid">
+
+                    <!-- 產品一:超甜玉米 -->
+                    <article class="product-card">
+                        <img src="images/corn.jpg" alt="新鮮超甜玉米" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-name">【產地直送】朝露鮮採超甜玉米</h3>
+                            <p>清晨人工採收,顆粒飽滿、甜度高。可以生吃、水煮、蒸或烤,是全家人都愛的天然零嘴。</p>
+                            <ul class="feature-list">
+                                <li><strong>日光熟成:</strong>讓每一穗玉米在充足的日照下,自然長出飽滿與鮮甜。</li>
+                                <li><strong>產地直送:</strong>從產地直接出貨,保留爽脆多汁的口感。</li>
+                            </ul>
+                            <dl class="facts">
+                                <dt>規格</dt><dd><span class="ph">○○ 條 / 箱</span></dd>
+                                <dt>售價</dt><dd><span class="ph">請填入價格</span></dd>
+                                <dt>產期</dt><dd>春、秋兩季採收 <span class="ph">(請依實際產期修改)</span></dd>
+                                <dt>料理</dt><dd>連外葉蒸約 10 分鐘,甜味最完整;也可以削下玉米粒做沙拉。</dd>
+                                <dt>保存</dt><dd>冷藏,建議 3 天內吃完。</dd>
+                            </dl>
+                            <a class="btn" href="#order" data-add="corn">加入訂單</a>
+                        </div>
+                    </article>
+
+                    <!-- 產品二:杭菊 -->
+                    <article class="product-card">
+                        <img src="images/flower.jpg" alt="白杭菊" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-name">【秋日療癒】手摘白杭菊茶</h3>
+                            <p>朵朵完整,溫潤回甘。為忙碌的您隨時遞上一杯舒壓的好茶,也可以放進甜湯或燉品。</p>
+                            <ul class="feature-list">
+                                <li><strong>晨露採收:</strong>在清晨由農人手工摘採盛開的花朵。</li>
+                                <li><strong>淡雅幽香:</strong>烘焙乾燥後,保留杭菊原有的清香與溫潤回甘。</li>
+                            </ul>
+                            <!-- 若有製程或檢驗佐證,可在這裡加註「未經硫燻」等說明 -->
+                            <dl class="facts">
+                                <dt>規格</dt><dd>70 公克 / 罐</dd>
+                                <dt>售價</dt><dd>NT$250 / 罐</dd>
+                                <dt>產期</dt><dd>每年 11 月至隔年 1 月採收 <span class="ph">(請依實際產期修改)</span></dd>
+                                <dt>沖泡</dt><dd>取 5 至 8 朵,以熱水沖泡 3 至 5 分鐘,也可以冷泡。</dd>
+                                <dt>保存</dt><dd>密封、避光,放在乾燥處。</dd>
+                            </dl>
+                            <a class="btn" href="#order" data-add="mum">加入訂單</a>
+                        </div>
+                    </article>
+
                 </div>
             </div>
+        </section>
 
-            <!-- 產品二：杭菊 -->
-            <div class="product-card">
-                <img src="images/flower.jpg" alt="嚴選白杭菊" class="product-img">
-                <div class="product-info">
-                    <h3 class="product-name">【秋日療癒】無硫烘焙嚴選白杭菊</h3>
-                    <p>拒絕化學硫燻，保留杭菊最純粹的清香。朵朵完整，溫潤回甘，為忙碌的您隨時遞上一杯舒壓的好茶。</p>
-                    
-                    <h3 class="sub-title">慢活茶香：手摘無毒杭菊茶</h3>
-                    <p>將秋天最美的容顏，封存在一杯茶香裡。</p>
-                    
-                    <ul class="feature-list">
-                        <li><strong>工人採收：</strong>工人純手工摘採最精華的盛開花朵。</li>
-                        <li><strong>淡雅幽香：</strong>無添加、無硫化烘焙，完整保留杭菊原有的清甜與溫潤，為忙碌的日常注入一份溫暖與平靜。</li>
-                    </ul>
-                </div> 
+        <section class="season" id="season">
+            <div class="container">
+                <h2 class="section-title">什麼時候買得到</h2>
+                <div class="cal" role="img" aria-label="產期表:杭菊 11 月至隔年 1 月,超甜玉米 3 至 6 月與 9 至 12 月">
+                    <div class="blank"></div>
+                    <div class="m">1</div><div class="m">2</div><div class="m">3</div><div class="m">4</div>
+                    <div class="m">5</div><div class="m">6</div><div class="m">7</div><div class="m">8</div>
+                    <div class="m">9</div><div class="m">10</div><div class="m">11</div><div class="m">12</div>
+
+                    <div class="label">杭菊</div>
+                    <div class="bar mum" style="grid-column: 2 / 3;"></div>
+                    <div style="grid-column: 3 / 12;"></div>
+                    <div class="bar mum" style="grid-column: 12 / 14;"></div>
+
+                    <div class="label">超甜玉米</div>
+                    <div style="grid-column: 2 / 4;"></div>
+                    <div class="bar corn" style="grid-column: 4 / 8;"></div>
+                    <div style="grid-column: 8 / 10;"></div>
+                    <div class="bar corn" style="grid-column: 10 / 14;"></div>
+                </div>
+                <ul class="legend">
+                    <li>杭菊:11 月至隔年 12 月採收</li>
+                    <li>超甜玉米:3 至 6 月(春作)、9 至 12 月(秋作)</li>
+                    <li><span class="ph">產期為示意,請依實際採收時間調整。</span></li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="order">
+            <div class="container">
+                <h2 class="section-title">線上訂購</h2>
+                <div class="checkout">
+                    <div class="card">
+                        <h3>1. 選擇數量</h3>
+                        <div class="line-item">
+                            <div>
+                                <div class="nm">杭菊</div>
+                                <div class="pr">70 公克 / 罐,NT$250</div>
+                            </div>
+                            <div class="stepper" role="group" aria-label="杭菊數量">
+                                <button type="button" data-id="mum" data-d="-1" aria-label="杭菊減少一罐">−</button>
+                                <output id="q-mum" aria-live="polite">0</output>
+                                <button type="button" data-id="mum" data-d="1" aria-label="杭菊增加一罐">+</button>
+                            </div>
+                        </div>
+                        <div class="line-item">
+                            <div>
+                                <div class="nm">超甜玉米</div>
+                                <div class="pr" id="corn-price-label"><span class="ph">價格與規格請填入</span></div>
+                            </div>
+                            <div class="stepper" role="group" aria-label="超甜玉米數量">
+                                <button type="button" data-id="corn" data-d="-1" aria-label="超甜玉米減少一份">−</button>
+                                <output id="q-corn" aria-live="polite">0</output>
+                                <button type="button" data-id="corn" data-d="1" aria-label="超甜玉米增加一份">+</button>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <span id="sub-label">小計</span>
+                            <strong id="subtotal">NT$0</strong>
+                            <small id="subnote">運費由農場依收件地址確認。</small>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>2. 收件資料</h3>
+                        <div class="field"><label for="f-name">姓名</label><input id="f-name" autocomplete="name"></div>
+                        <div class="field"><label for="f-phone">電話</label><input id="f-phone" type="tel" autocomplete="tel"></div>
+                        <div class="field"><label for="f-addr">收件地址</label><input id="f-addr" autocomplete="street-address"></div>
+                        <div class="field"><label for="f-note">備註(選填)</label><textarea id="f-note" rows="2" placeholder="例如:希望的到貨日、送禮需求"></textarea></div>
+
+                        <h3 style="margin-top:1.5rem">3. 送出訂單</h3>
+                        <div class="field">
+                            <label for="preview">訂單內容</label>
+                            <textarea id="preview" class="preview" readonly></textarea>
+                        </div>
+                        <div class="actions">
+                            <button type="button" class="btn" id="btn-send">送出訂單</button>
+                            <button type="button" class="btn ghost" id="btn-copy">複製訂單內容</button>
+                        </div>
+                        <p class="msg" id="msg" role="status"></p>
+                    </div>
+                </div>
+
+                <p class="contact-line">也可以直接聯絡我們:電話 <span class="ph">0900-000-000</span>、LINE <span class="ph">@your-line-id</span>、Email <span class="ph">hello@example.com</span></p>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 玉見秋菊 版權所有. | 友善土地・自然無毒</p>
-        <!-- 您也可以在這裡補充聯絡方式，例如： -->
-        <!-- <p style="margin-top: 10px;">聯絡我們：yujian@example.com | LINE客服：@yujian</p> -->
+        <p>&copy; 2026 玉見秋菊農場 版權所有. | 產地直送・自己種自己採</p>
+        <p><span class="ph">地址、統一編號或登記資料</span></p>
     </footer>
 
+<script>
+(function () {
+    /* ============ 請在這裡修改設定 ============ */
+    var ORDER_EMAIL   = "leetom4777@gmail.com"; // 接收訂單的 Email
+    var FORM_ENDPOINT = "leetom4777@gmail.com"; // 選填:Formspree 表單網址,例如 "https://formspree.io/f/xxxxxxxx"
+                                             // 有填:按「送出訂單」會直接寄到你的信箱,客人不用開郵件程式
+                                             // 沒填:按「送出訂單」會開啟客人的郵件程式
+    var PRICE_MUM  = 250;                    // 杭菊每罐價格
+    var PRICE_CORN = null;                   // 超甜玉米價格,填數字後會自動計算,例如 600
+    var UNIT_CORN  = "份";                   // 超甜玉米單位,例如 "箱"
+    /* ========================================== */
+
+    var qty = { mum: 0, corn: 0 };
+    var $ = function (id) { return document.getElementById(id); };
+    var msg = $("msg"), preview = $("preview"), sendBtn = $("btn-send");
+
+    sendBtn.textContent = FORM_ENDPOINT ? "送出訂單" : "用 Email 送出訂單";
+
+    if (PRICE_CORN !== null) {
+        $("corn-price-label").textContent = "NT$" + PRICE_CORN + " / " + UNIT_CORN;
+    }
+
+    function money(n) { return "NT$" + n.toLocaleString("en-US"); }
+
+    function total() {
+        var t = qty.mum * PRICE_MUM;
+        if (PRICE_CORN !== null) t += qty.corn * PRICE_CORN;
+        return t;
+    }
+
+    function orderText() {
+        var lines = ["玉見秋菊農場 訂單", ""];
+        if (qty.mum) lines.push("杭菊(70 公克 / 罐)× " + qty.mum + " = " + money(qty.mum * PRICE_MUM));
+        if (qty.corn) {
+            lines.push(PRICE_CORN !== null
+                ? "超甜玉米 × " + qty.corn + UNIT_CORN + " = " + money(qty.corn * PRICE_CORN)
+                : "超甜玉米 × " + qty.corn + "(價格請農場回覆)");
+        }
+        if (!qty.mum && !qty.corn) lines.push("(尚未選擇產品)");
+        if (qty.mum || (qty.corn && PRICE_CORN !== null)) {
+            lines.push("小計:" + money(total()) + "(運費另計)");
+        }
+        lines.push("", "姓名:" + $("f-name").value.trim(), "電話:" + $("f-phone").value.trim(),
+            "地址:" + $("f-addr").value.trim());
+        var note = $("f-note").value.trim();
+        if (note) lines.push("備註:" + note);
+        return lines.join("\n");
+    }
+
+    function refresh() {
+        $("q-mum").textContent = qty.mum;
+        $("q-corn").textContent = qty.corn;
+        $("subtotal").textContent = money(total());
+        var cornUnpriced = qty.corn && PRICE_CORN === null;
+        $("sub-label").textContent = cornUnpriced ? "杭菊小計" : "小計";
+        $("subnote").textContent = cornUnpriced
+            ? "超甜玉米價格與運費由農場回覆確認。"
+            : "運費由農場依收件地址確認。";
+        preview.value = orderText();
+    }
+
+    function say(text, kind) { msg.textContent = text; msg.className = "msg" + (kind ? " " + kind : ""); }
+
+    function validate() {
+        if (!qty.mum && !qty.corn) { say("請先選擇至少一項產品。", "err"); return false; }
+        if (!$("f-name").value.trim()) { say("請填寫姓名。", "err"); $("f-name").focus(); return false; }
+        if (!$("f-phone").value.trim()) { say("請填寫電話。", "err"); $("f-phone").focus(); return false; }
+        if (!$("f-addr").value.trim()) { say("請填寫收件地址。", "err"); $("f-addr").focus(); return false; }
+        return true;
+    }
+
+    // 步進按鈕
+    document.querySelectorAll(".stepper button").forEach(function (b) {
+        b.addEventListener("click", function () {
+            var id = b.getAttribute("data-id"), d = parseInt(b.getAttribute("data-d"), 10);
+            qty[id] = Math.max(0, Math.min(99, qty[id] + d));
+            say("");
+            refresh();
+        });
+    });
+
+    // 產品卡片的「加入訂單」:數量 +1 並跳到訂購區
+    document.querySelectorAll("[data-add]").forEach(function (a) {
+        a.addEventListener("click", function () {
+            var id = a.getAttribute("data-add");
+            qty[id] = Math.min(99, qty[id] + 1);
+            say("");
+            refresh();
+        });
+    });
+
+    ["f-name", "f-phone", "f-addr", "f-note"].forEach(function (id) {
+        $(id).addEventListener("input", refresh);
+    });
+
+    function sendByMail() {
+        var url = "mailto:" + ORDER_EMAIL + "?subject=" + encodeURIComponent("玉見秋菊農場 訂單") +
+            "&body=" + encodeURIComponent(orderText());
+        window.location.href = url;
+        say("已開啟你的郵件程式。若沒有跳出,請按「複製訂單內容」,再貼到 Email 或 LINE 傳給我們。", "ok");
+    }
+
+    function sendByForm() {
+        sendBtn.disabled = true;
+        say("送出中…");
+        fetch(FORM_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({
+                _subject: "玉見秋菊農場 訂單",
+                name: $("f-name").value.trim(),
+                phone: $("f-phone").value.trim(),
+                address: $("f-addr").value.trim(),
+                note: $("f-note").value.trim(),
+                order: orderText()
+            })
+        }).then(function (r) {
+            if (!r.ok) throw new Error("bad status");
+            say("訂單已送出,農場會盡快與你聯絡確認。", "ok");
+        }).catch(function () {
+            say("送出失敗,請按「複製訂單內容」,再用 Email 或 LINE 傳給我們。", "err");
+        }).then(function () { sendBtn.disabled = false; });
+    }
+
+    sendBtn.addEventListener("click", function () {
+        if (!validate()) return;
+        if (FORM_ENDPOINT) sendByForm(); else sendByMail();
+    });
+
+    $("btn-copy").addEventListener("click", function () {
+        if (!validate()) return;
+        var text = orderText();
+        function fallback() {
+            preview.removeAttribute("readonly"); preview.focus(); preview.select();
+            var ok = false;
+            try { ok = document.execCommand("copy"); } catch (e) {}
+            preview.setAttribute("readonly", "");
+            say(ok ? "已複製訂單內容,請貼到 Email 或 LINE 傳給我們。" : "請長按或選取上方訂單內容後手動複製。", ok ? "ok" : "err");
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+                say("已複製訂單內容,請貼到 Email 或 LINE 傳給我們。", "ok");
+            }, fallback);
+        } else { fallback(); }
+    });
+
+    refresh();
+})();
+</script>
 </body>
 </html>
