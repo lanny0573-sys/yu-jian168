@@ -42,6 +42,7 @@
 
         h1, h2, h3 { font-family: 'Noto Serif TC', 'Songti TC', serif; line-height: 1.4; }
         img { max-width: 100%; display: block; }
+        [hidden] { display: none !important; }
         :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
 
         /* 待填資料標記:填完後把 class="ph" 整個移除即可 */
@@ -181,26 +182,25 @@
 
         /* 產期 */
         .season { background: var(--surface); border-block: 1px solid var(--line); }
-        .cal {
+        .cal-row {
             display: grid;
             grid-template-columns: clamp(4.75rem, 18vw, 7rem) repeat(12, minmax(0, 1fr));
-            row-gap: .7rem;
             align-items: center;
+            margin-bottom: .7rem;
         }
-        .cal .m {
+        .cal-row .m {
             text-align: center;
             font-size: clamp(.7rem, 2.2vw, .9rem);
             color: var(--text-light);
             padding-bottom: .4rem;
             border-bottom: 1px solid var(--line);
         }
-        .cal .blank { border-bottom: 1px solid var(--line); }
-        .cal .label { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: clamp(.95rem, 2.6vw, 1.1rem); }
-        .cal .bar { height: 1.9rem; border-radius: 999px; }
-        .cal .bar.mum { background: #F2CF5A; }
-        .cal .bar.corn { background: #6E8F5B; }
-        .legend { margin-top: 1.25rem; color: var(--text-light); font-size: .95rem; }
+        .cal-row .blank { border-bottom: 1px solid var(--line); }
+        .cal-row .label { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: clamp(.95rem, 2.6vw, 1.1rem); padding-right: .5rem; line-height: 1.4; }
+        .cal-row .bar { height: 1.9rem; border-radius: 999px; }
+        .legend { margin-top: 1.25rem; padding: 0; color: var(--text-light); font-size: .95rem; }
         .legend li { list-style: none; }
+        .empty { color: var(--text-light); text-align: center; grid-column: 1 / -1; padding: 2rem 0; }
 
         /* 訂購 */
         .checkout {
@@ -288,7 +288,7 @@
             </a>
             <nav aria-label="主選單">
                 <a href="#shop">產品</a>
-                <a href="#season">產期</a>
+                <a href="#season" id="nav-season">產期</a>
                 <a href="#order">訂購</a>
             </nav>
         </div>
@@ -315,80 +315,15 @@
         <section class="products" id="shop" style="padding-top: 0;">
             <div class="container">
                 <h2 class="section-title">當季嚴選</h2>
-                <div class="product-grid">
-
-                    <!-- 產品一:超甜玉米 -->
-                    <article class="product-card">
-                        <img src="images/corn.jpg" alt="新鮮超甜玉米" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-name">【產地直送】朝露鮮採超甜玉米</h3>
-                            <p>清晨人工採收,顆粒飽滿、甜度高。可以生吃、水煮、蒸或烤,是全家人都愛的天然零嘴。</p>
-                            <ul class="feature-list">
-                                <li><strong>日光熟成:</strong>讓每一穗玉米在充足的日照下,自然長出飽滿與鮮甜。</li>
-                                <li><strong>產地直送:</strong>從產地直接出貨,保留爽脆多汁的口感。</li>
-                            </ul>
-                            <dl class="facts">
-                                <dt>規格</dt><dd><span class="ph">○○ 條 / 箱</span></dd>
-                                <dt>售價</dt><dd><span class="ph">請填入價格</span></dd>
-                                <dt>產期</dt><dd>春、秋兩季採收 <span class="ph">(請依實際產期修改)</span></dd>
-                                <dt>料理</dt><dd>連外葉蒸約 10 分鐘,甜味最完整;也可以削下玉米粒做沙拉。</dd>
-                                <dt>保存</dt><dd>冷藏,建議 3 天內吃完。</dd>
-                            </dl>
-                            <a class="btn" href="#order" data-add="corn">加入訂單</a>
-                        </div>
-                    </article>
-
-                    <!-- 產品二:杭菊 -->
-                    <article class="product-card">
-                        <img src="images/flower.jpg" alt="白杭菊" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-name">【秋日療癒】手摘白杭菊茶</h3>
-                            <p>朵朵完整,溫潤回甘。為忙碌的您隨時遞上一杯舒壓的好茶,也可以放進甜湯或燉品。</p>
-                            <ul class="feature-list">
-                                <li><strong>晨露採收:</strong>在清晨由農人手工摘採盛開的花朵。</li>
-                                <li><strong>淡雅幽香:</strong>烘焙乾燥後,保留杭菊原有的清香與溫潤回甘。</li>
-                            </ul>
-                            <!-- 若有製程或檢驗佐證,可在這裡加註「未經硫燻」等說明 -->
-                            <dl class="facts">
-                                <dt>規格</dt><dd>70 公克 / 罐</dd>
-                                <dt>售價</dt><dd>NT$250 / 罐</dd>
-                                <dt>產期</dt><dd>每年 11 月至隔年 1 月採收 <span class="ph">(請依實際產期修改)</span></dd>
-                                <dt>沖泡</dt><dd>取 5 至 8 朵,以熱水沖泡 3 至 5 分鐘,也可以冷泡。</dd>
-                                <dt>保存</dt><dd>密封、避光,放在乾燥處。</dd>
-                            </dl>
-                            <a class="btn" href="#order" data-add="mum">加入訂單</a>
-                        </div>
-                    </article>
-
-                </div>
+                <div class="product-grid" id="product-grid"></div>
             </div>
         </section>
 
         <section class="season" id="season">
             <div class="container">
                 <h2 class="section-title">什麼時候買得到</h2>
-                <div class="cal" role="img" aria-label="產期表:杭菊 11 月至隔年 1 月,超甜玉米 3 至 6 月與 9 至 12 月">
-                    <div class="blank"></div>
-                    <div class="m">1</div><div class="m">2</div><div class="m">3</div><div class="m">4</div>
-                    <div class="m">5</div><div class="m">6</div><div class="m">7</div><div class="m">8</div>
-                    <div class="m">9</div><div class="m">10</div><div class="m">11</div><div class="m">12</div>
-
-                    <div class="label">杭菊</div>
-                    <div class="bar mum" style="grid-column: 2 / 3;"></div>
-                    <div style="grid-column: 3 / 12;"></div>
-                    <div class="bar mum" style="grid-column: 12 / 14;"></div>
-
-                    <div class="label">超甜玉米</div>
-                    <div style="grid-column: 2 / 4;"></div>
-                    <div class="bar corn" style="grid-column: 4 / 8;"></div>
-                    <div style="grid-column: 8 / 10;"></div>
-                    <div class="bar corn" style="grid-column: 10 / 14;"></div>
-                </div>
-                <ul class="legend">
-                    <li>杭菊:11 月至隔年 12 月採收</li>
-                    <li>超甜玉米:3 至 6 月(春作)、9 至 12 月(秋作)</li>
-                    <li><span class="ph">產期為示意,請依實際採收時間調整。</span></li>
-                </ul>
+                <div id="cal-wrap"></div>
+                <ul class="legend" id="cal-legend"></ul>
             </div>
         </section>
 
@@ -398,28 +333,7 @@
                 <div class="checkout">
                     <div class="card">
                         <h3>1. 選擇數量</h3>
-                        <div class="line-item">
-                            <div>
-                                <div class="nm">杭菊</div>
-                                <div class="pr">70 公克 / 罐,NT$250</div>
-                            </div>
-                            <div class="stepper" role="group" aria-label="杭菊數量">
-                                <button type="button" data-id="mum" data-d="-1" aria-label="杭菊減少一罐">−</button>
-                                <output id="q-mum" aria-live="polite">0</output>
-                                <button type="button" data-id="mum" data-d="1" aria-label="杭菊增加一罐">+</button>
-                            </div>
-                        </div>
-                        <div class="line-item">
-                            <div>
-                                <div class="nm">超甜玉米</div>
-                                <div class="pr" id="corn-price-label"><span class="ph">價格與規格請填入</span></div>
-                            </div>
-                            <div class="stepper" role="group" aria-label="超甜玉米數量">
-                                <button type="button" data-id="corn" data-d="-1" aria-label="超甜玉米減少一份">−</button>
-                                <output id="q-corn" aria-live="polite">0</output>
-                                <button type="button" data-id="corn" data-d="1" aria-label="超甜玉米增加一份">+</button>
-                            </div>
-                        </div>
+                        <div id="line-items"></div>
                         <div class="total">
                             <span id="sub-label">小計</span>
                             <strong id="subtotal">NT$0</strong>
@@ -440,6 +354,7 @@
                             <textarea id="preview" class="preview" readonly></textarea>
                         </div>
                         <div class="actions">
+                            <button type="button" class="btn" id="btn-line" hidden>用 LINE 傳送訂單</button>
                             <button type="button" class="btn" id="btn-send">送出訂單</button>
                             <button type="button" class="btn ghost" id="btn-copy">複製訂單內容</button>
                         </div>
@@ -457,48 +372,173 @@
         <p><span class="ph">地址、統一編號或登記資料</span></p>
     </footer>
 
+<script src="products.js"></script>
 <script>
 (function () {
     /* ============ 請在這裡修改設定 ============ */
-    var ORDER_EMAIL   = "leetom4777@gmail.com"; // 接收訂單的 Email
-    var FORM_ENDPOINT = "leetom4777@gmail.com"; // 選填:Formspree 表單網址,例如 "https://formspree.io/f/xxxxxxxx"
-                                             // 有填:按「送出訂單」會直接寄到你的信箱,客人不用開郵件程式
+    var ORDER_EMAIL   = "hello@example.com"; // 接收訂單的 Email
+    var FORM_ENDPOINT = "";                  // 選填:Formspree 表單網址,例如 "https://formspree.io/f/xxxxxxxx"
+                                             // 有填:按「送出訂單」會直接寄到你的信箱
                                              // 沒填:按「送出訂單」會開啟客人的郵件程式
-    var PRICE_MUM  = 250;                    // 杭菊每罐價格
-    var PRICE_CORN = null;                   // 超甜玉米價格,填數字後會自動計算,例如 600
-    var UNIT_CORN  = "份";                   // 超甜玉米單位,例如 "箱"
+    var LINE_OA_ID    = "";                  // 選填:LINE 官方帳號 ID(含 @),例如 "@yujian"
+                                             // 有填:會出現「用 LINE 傳送訂單」,客人按一下就帶著訂單開啟 LINE
+    /* 產品內容(名稱、價格、圖片、產期)都在 products.js,請用 admin.html 新增或刪除產品 */
     /* ========================================== */
 
-    var qty = { mum: 0, corn: 0 };
+    var COLORS = ["#F2CF5A", "#6E8F5B", "#E3A06A", "#7FB3A6", "#D99A9A", "#A98467"];
     var $ = function (id) { return document.getElementById(id); };
     var msg = $("msg"), preview = $("preview"), sendBtn = $("btn-send");
+    var all = Array.isArray(window.PRODUCTS) ? window.PRODUCTS : null;
+    var products = (all || []).filter(function (p) { return p && p.active !== false; });
+    var qty = {}, outs = {};
+    products.forEach(function (p) { qty[p.id] = 0; });
 
-    sendBtn.textContent = FORM_ENDPOINT ? "送出訂單" : "用 Email 送出訂單";
+    function h(tag, attrs, kids) {
+        var e = document.createElement(tag);
+        if (attrs) for (var k in attrs) {
+            if (k === "text") e.textContent = attrs[k];
+            else e.setAttribute(k, attrs[k]);
+        }
+        (kids || []).forEach(function (c) { if (c) e.appendChild(c); });
+        return e;
+    }
+    function hasPrice(p) { return p.price !== null && p.price !== undefined && p.price !== "" && !isNaN(Number(p.price)); }
+    function money(n) { return "NT$" + n.toLocaleString("en-US"); }
+    function priceLabel(p) { return hasPrice(p) ? money(Number(p.price)) + (p.unit ? " / " + p.unit : "") : "請洽詢"; }
+    function say(text, kind) { msg.textContent = text; msg.className = "msg" + (kind ? " " + kind : ""); }
 
-    if (PRICE_CORN !== null) {
-        $("corn-price-label").textContent = "NT$" + PRICE_CORN + " / " + UNIT_CORN;
+    /* ---------- 產品卡片 ---------- */
+    function renderCards() {
+        var grid = $("product-grid");
+        grid.textContent = "";
+        if (all === null) { grid.appendChild(h("p", { "class": "empty", text: "產品資料載入失敗,請稍後再試或直接聯絡我們。" })); return; }
+        if (!products.length) { grid.appendChild(h("p", { "class": "empty", text: "目前沒有上架的產品,歡迎洽詢。" })); return; }
+        products.forEach(function (p) {
+            var img = p.image
+                ? h("img", { src: p.image, alt: p.alt || p.name, "class": "product-img", loading: "lazy" })
+                : h("div", { "class": "product-img" });
+            var rows = [["規格", p.spec || "請洽詢"], ["售價", priceLabel(p)]];
+            if (p.seasonNote) rows.push(["產期", p.seasonNote]);
+            (p.facts || []).forEach(function (f) { if (f && f.k) rows.push([f.k, f.v || ""]); });
+            var dl = h("dl", { "class": "facts" });
+            rows.forEach(function (r) { dl.appendChild(h("dt", { text: r[0] })); dl.appendChild(h("dd", { text: r[1] })); });
+
+            var feats = h("ul", { "class": "feature-list" });
+            (p.features || []).forEach(function (f) {
+                if (!f || !f.t) return;
+                feats.appendChild(h("li", null, [h("strong", { text: f.t + ":" }), document.createTextNode(f.d || "")]));
+            });
+
+            var add = h("a", { "class": "btn", href: "#order", text: "加入訂單" });
+            add.addEventListener("click", function () {
+                qty[p.id] = Math.min(99, qty[p.id] + 1);
+                say("");
+                refresh();
+            });
+
+            var info = h("div", { "class": "product-info" }, [
+                h("h3", { "class": "product-name", text: p.title || p.name }),
+                p.desc ? h("p", { text: p.desc }) : null,
+                feats.children.length ? feats : null,
+                dl,
+                add
+            ]);
+            grid.appendChild(h("article", { "class": "product-card" }, [img, info]));
+        });
     }
 
-    function money(n) { return "NT$" + n.toLocaleString("en-US"); }
+    /* ---------- 產期表 ---------- */
+    function runs(months) {
+        var set = {}, out = [], start = null, m;
+        (months || []).forEach(function (x) { x = parseInt(x, 10); if (x >= 1 && x <= 12) set[x] = true; });
+        for (m = 1; m <= 13; m++) {
+            if (set[m]) { if (start === null) start = m; }
+            else if (start !== null) { out.push([start, m - 1]); start = null; }
+        }
+        return out;
+    }
+    function renderCalendar() {
+        var withSeason = products.filter(function (p) { return runs(p.months).length; });
+        if (!withSeason.length) { $("season").hidden = true; $("nav-season").hidden = true; return; }
+        var wrap = $("cal-wrap"), legend = $("cal-legend"), m;
+        wrap.textContent = ""; legend.textContent = "";
+        var head = h("div", { "class": "cal-row" }, [h("div", { "class": "blank" })]);
+        for (m = 1; m <= 12; m++) head.appendChild(h("div", { "class": "m", text: String(m) }));
+        wrap.appendChild(head);
+        var labels = [];
+        withSeason.forEach(function (p, i) {
+            var row = h("div", { "class": "cal-row" });
+            var lab = h("div", { "class": "label", text: p.name });
+            lab.style.gridRow = "1"; lab.style.gridColumn = "1";
+            row.appendChild(lab);
+            runs(p.months).forEach(function (r) {
+                var bar = h("div", { "class": "bar" });
+                bar.style.gridRow = "1";
+                bar.style.gridColumn = (r[0] + 1) + " / " + (r[1] + 2);
+                bar.style.background = COLORS[i % COLORS.length];
+                row.appendChild(bar);
+            });
+            wrap.appendChild(row);
+            if (p.seasonNote) {
+                legend.appendChild(h("li", { text: p.name + ":" + p.seasonNote }));
+                labels.push(p.name + " " + p.seasonNote);
+            }
+        });
+        legend.appendChild(h("li", { text: "實際採收時間會依天氣與作物狀況調整。" }));
+        wrap.setAttribute("role", "img");
+        wrap.setAttribute("aria-label", "產期表:" + labels.join(";"));
+    }
 
-    function total() {
-        var t = qty.mum * PRICE_MUM;
-        if (PRICE_CORN !== null) t += qty.corn * PRICE_CORN;
-        return t;
+    /* ---------- 訂購 ---------- */
+    function renderCart() {
+        var box = $("line-items");
+        box.textContent = "";
+        if (!products.length) { box.appendChild(h("p", { "class": "empty", text: "目前沒有可訂購的產品。" })); return; }
+        products.forEach(function (p) {
+            var out = h("output", { "aria-live": "polite", text: "0" });
+            outs[p.id] = out;
+            function step(d, sym, label) {
+                var b = h("button", { type: "button", "aria-label": label, text: sym });
+                b.addEventListener("click", function () {
+                    qty[p.id] = Math.max(0, Math.min(99, qty[p.id] + d));
+                    say("");
+                    refresh();
+                });
+                return b;
+            }
+            box.appendChild(h("div", { "class": "line-item" }, [
+                h("div", null, [
+                    h("div", { "class": "nm", text: p.name }),
+                    h("div", { "class": "pr", text: (p.spec ? p.spec + ",": "") + priceLabel(p) })
+                ]),
+                h("div", { "class": "stepper", role: "group", "aria-label": p.name + "數量" }, [
+                    step(-1, "−", p.name + "減少"), out, step(1, "+", p.name + "增加")
+                ])
+            ]));
+        });
+    }
+
+    function totals() {
+        var sum = 0, unpriced = false, any = false;
+        products.forEach(function (p) {
+            var n = qty[p.id];
+            if (!n) return;
+            any = true;
+            if (hasPrice(p)) sum += n * Number(p.price); else unpriced = true;
+        });
+        return { sum: sum, unpriced: unpriced, any: any };
     }
 
     function orderText() {
-        var lines = ["玉見秋菊農場 訂單", ""];
-        if (qty.mum) lines.push("杭菊(70 公克 / 罐)× " + qty.mum + " = " + money(qty.mum * PRICE_MUM));
-        if (qty.corn) {
-            lines.push(PRICE_CORN !== null
-                ? "超甜玉米 × " + qty.corn + UNIT_CORN + " = " + money(qty.corn * PRICE_CORN)
-                : "超甜玉米 × " + qty.corn + "(價格請農場回覆)");
-        }
-        if (!qty.mum && !qty.corn) lines.push("(尚未選擇產品)");
-        if (qty.mum || (qty.corn && PRICE_CORN !== null)) {
-            lines.push("小計:" + money(total()) + "(運費另計)");
-        }
+        var t = totals(), lines = ["玉見秋菊農場 訂單", ""];
+        products.forEach(function (p) {
+            var n = qty[p.id];
+            if (!n) return;
+            lines.push(p.name + (p.spec ? "(" + p.spec + ")" : "") + " × " + n + (p.unit ? " " + p.unit : "") +
+                (hasPrice(p) ? " = " + money(n * Number(p.price)) : "(價格請農場回覆)"));
+        });
+        if (!t.any) lines.push("(尚未選擇產品)");
+        else if (t.sum > 0) lines.push("小計:" + money(t.sum) + (t.unpriced ? "(未標價品項與運費另計)" : "(運費另計)"));
         lines.push("", "姓名:" + $("f-name").value.trim(), "電話:" + $("f-phone").value.trim(),
             "地址:" + $("f-addr").value.trim());
         var note = $("f-note").value.trim();
@@ -507,50 +547,29 @@
     }
 
     function refresh() {
-        $("q-mum").textContent = qty.mum;
-        $("q-corn").textContent = qty.corn;
-        $("subtotal").textContent = money(total());
-        var cornUnpriced = qty.corn && PRICE_CORN === null;
-        $("sub-label").textContent = cornUnpriced ? "杭菊小計" : "小計";
-        $("subnote").textContent = cornUnpriced
-            ? "超甜玉米價格與運費由農場回覆確認。"
+        var t = totals();
+        products.forEach(function (p) { if (outs[p.id]) outs[p.id].textContent = qty[p.id]; });
+        $("subtotal").textContent = money(t.sum);
+        $("sub-label").textContent = t.unpriced ? "已標價小計" : "小計";
+        $("subnote").textContent = t.unpriced
+            ? "未標價的產品與運費由農場回覆確認。"
             : "運費由農場依收件地址確認。";
         preview.value = orderText();
     }
 
-    function say(text, kind) { msg.textContent = text; msg.className = "msg" + (kind ? " " + kind : ""); }
-
     function validate() {
-        if (!qty.mum && !qty.corn) { say("請先選擇至少一項產品。", "err"); return false; }
+        if (!totals().any) { say("請先選擇至少一項產品。", "err"); return false; }
         if (!$("f-name").value.trim()) { say("請填寫姓名。", "err"); $("f-name").focus(); return false; }
         if (!$("f-phone").value.trim()) { say("請填寫電話。", "err"); $("f-phone").focus(); return false; }
         if (!$("f-addr").value.trim()) { say("請填寫收件地址。", "err"); $("f-addr").focus(); return false; }
         return true;
     }
 
-    // 步進按鈕
-    document.querySelectorAll(".stepper button").forEach(function (b) {
-        b.addEventListener("click", function () {
-            var id = b.getAttribute("data-id"), d = parseInt(b.getAttribute("data-d"), 10);
-            qty[id] = Math.max(0, Math.min(99, qty[id] + d));
-            say("");
-            refresh();
-        });
-    });
-
-    // 產品卡片的「加入訂單」:數量 +1 並跳到訂購區
-    document.querySelectorAll("[data-add]").forEach(function (a) {
-        a.addEventListener("click", function () {
-            var id = a.getAttribute("data-add");
-            qty[id] = Math.min(99, qty[id] + 1);
-            say("");
-            refresh();
-        });
-    });
-
     ["f-name", "f-phone", "f-addr", "f-note"].forEach(function (id) {
         $(id).addEventListener("input", refresh);
     });
+
+    sendBtn.textContent = FORM_ENDPOINT ? "送出訂單" : "用 Email 送出訂單";
 
     function sendByMail() {
         var url = "mailto:" + ORDER_EMAIL + "?subject=" + encodeURIComponent("玉見秋菊農場 訂單") +
@@ -586,6 +605,17 @@
         if (FORM_ENDPOINT) sendByForm(); else sendByMail();
     });
 
+    var lineBtn = $("btn-line");
+    if (LINE_OA_ID) {
+        lineBtn.hidden = false;
+        sendBtn.classList.add("ghost");
+        lineBtn.addEventListener("click", function () {
+            if (!validate()) return;
+            window.location.href = "https://line.me/R/oaMessage/" + LINE_OA_ID + "/?" + encodeURIComponent(orderText());
+            say("已開啟 LINE,請在對話框按傳送,訂單就會送到農場。", "ok");
+        });
+    }
+
     $("btn-copy").addEventListener("click", function () {
         if (!validate()) return;
         var text = orderText();
@@ -603,6 +633,9 @@
         } else { fallback(); }
     });
 
+    renderCards();
+    renderCalendar();
+    renderCart();
     refresh();
 })();
 </script>
