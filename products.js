@@ -8,7 +8,7 @@ window.PRODUCTS = [
     "title": "【產地直送】朝露鮮採超甜玉米",
     "desc": "清晨人工採收,顆粒飽滿、甜度高。可以生吃、水煮、蒸或烤,是全家人都愛的天然零嘴。",
     "image": "images/corn.jpg",
-    "price": 100,
+    "price": 300,
     "unit": "包",
     "spec": "三斤",
     "features": [
