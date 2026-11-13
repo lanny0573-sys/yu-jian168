@@ -8,9 +8,9 @@ window.PRODUCTS = [
     "title": "【產地直送】朝露鮮採超甜玉米",
     "desc": "清晨人工採收,顆粒飽滿、甜度高。可以生吃、水煮、蒸或烤,是全家人都愛的天然零嘴。",
     "image": "images/corn.jpg",
-    "price": 300,
-    "unit": "包",
-    "spec": "三斤",
+    "price": null,
+    "unit": "",
+    "spec": "",
     "features": [
       {
         "t": "日光熟成",
@@ -50,7 +50,7 @@ window.PRODUCTS = [
     "title": "【秋日療癒】手摘白杭菊茶",
     "desc": "朵朵完整,溫潤回甘。為忙碌的您隨時遞上一杯舒壓的好茶,也可以放進甜湯或燉品。",
     "image": "images/flower.jpg",
-    "price": 250,
+    "price": null,
     "unit": "罐",
     "spec": "70 公克 / 罐",
     "features": [
