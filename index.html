@@ -261,6 +261,9 @@
         .msg.err { color: #B3261E; }
         .msg.ok { color: #2E6B3A; }
         .contact-line { margin-top: 2rem; color: var(--text-light); text-align: center; }
+        .contact-line a { color: var(--accent-text); font-weight: 500; }
+        .ship { text-align: center; color: var(--text-light); max-width: 40em; margin: -1rem auto 2rem; }
+        .hint-line { color: var(--text-light); font-size: .9rem; margin-top: .6rem; }
 
         /* 頁尾 */
         footer {
@@ -330,7 +333,9 @@
         <section id="order">
             <div class="container">
                 <h2 class="section-title">線上訂購</h2>
-                <div class="checkout">
+                <p class="ship" id="ship-note" hidden></p>
+                <p class="empty" id="order-closed" hidden>線上訂購即將開放,敬請期待。</p>
+                <div class="checkout" id="checkout">
                     <div class="card">
                         <h3>1. 選擇數量</h3>
                         <div id="line-items"></div>
@@ -357,33 +362,35 @@
                             <button type="button" class="btn" id="btn-line" hidden>用 LINE 傳送訂單</button>
                             <button type="button" class="btn" id="btn-send">送出訂單</button>
                             <button type="button" class="btn ghost" id="btn-copy">複製訂單內容</button>
+                            <a class="btn ghost" id="btn-tel" hidden>電話訂購</a>
                         </div>
                         <p class="msg" id="msg" role="status"></p>
+                        <p class="hint-line" id="privacy-note" hidden></p>
                     </div>
                 </div>
 
-                <p class="contact-line">也可以直接聯絡我們:電話 <span class="ph">0900-000-000</span>、LINE <span class="ph">@your-line-id</span>、Email <span class="ph">hello@example.com</span></p>
+                <p class="contact-line" id="contact-line" hidden></p>
             </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2026 玉見秋菊農場 版權所有. | 產地直送・自己種自己採</p>
-        <p><span class="ph">地址、統一編號或登記資料</span></p>
+        <p id="footer-info" hidden></p>
     </footer>
 
+<script src="settings.js"></script>
 <script src="products.js"></script>
 <script>
 (function () {
-    /* ============ 請在這裡修改設定 ============ */
-    var ORDER_EMAIL   = "hello@example.com"; // 接收訂單的 Email
-    var FORM_ENDPOINT = "";                  // 選填:Formspree 表單網址,例如 "https://formspree.io/f/xxxxxxxx"
-                                             // 有填:按「送出訂單」會直接寄到你的信箱
-                                             // 沒填:按「送出訂單」會開啟客人的郵件程式
-    var LINE_OA_ID    = "";                  // 選填:LINE 官方帳號 ID(含 @),例如 "@yujian"
-                                             // 有填:會出現「用 LINE 傳送訂單」,客人按一下就帶著訂單開啟 LINE
-    /* 產品內容(名稱、價格、圖片、產期)都在 products.js,請用 admin.html 新增或刪除產品 */
-    /* ========================================== */
+    /* 電話、LINE、Email、訂單送出方式都在 settings.js,產品內容在 products.js。
+       請用 admin.html 修改並一鍵發布,不需要直接改這個檔案。 */
+    var S = window.SITE || {};
+    var ORDER_EMAIL   = String(S.email || "").trim();
+    var FORM_ENDPOINT = String(S.formEndpoint || "").trim();
+    var LINE_OA_ID    = String(S.lineId || "").trim();
+    if (LINE_OA_ID && LINE_OA_ID.charAt(0) !== "@") LINE_OA_ID = "@" + LINE_OA_ID;
+    var PHONE         = String(S.phone || "").trim();
 
     var COLORS = ["#F2CF5A", "#6E8F5B", "#E3A06A", "#7FB3A6", "#D99A9A", "#A98467"];
     var $ = function (id) { return document.getElementById(id); };
@@ -569,7 +576,8 @@
         $(id).addEventListener("input", refresh);
     });
 
-    sendBtn.textContent = FORM_ENDPOINT ? "送出訂單" : "用 Email 送出訂單";
+    if (!FORM_ENDPOINT && !ORDER_EMAIL) sendBtn.hidden = true;
+    else sendBtn.textContent = FORM_ENDPOINT ? "送出訂單" : "用 Email 送出訂單";
 
     function sendByMail() {
         var url = "mailto:" + ORDER_EMAIL + "?subject=" + encodeURIComponent("玉見秋菊農場 訂單") +
@@ -614,6 +622,32 @@
             window.location.href = "https://line.me/R/oaMessage/" + LINE_OA_ID + "/?" + encodeURIComponent(orderText());
             say("已開啟 LINE,請在對話框按傳送,訂單就會送到農場。", "ok");
         });
+    }
+
+    var telBtn = $("btn-tel");
+    if (PHONE) { telBtn.hidden = false; telBtn.href = "tel:" + PHONE.replace(/[^\d+]/g, ""); }
+
+    if (!LINE_OA_ID && !FORM_ENDPOINT && !ORDER_EMAIL && !PHONE) {
+        $("checkout").hidden = true;
+        $("order-closed").hidden = false;
+    }
+    if (S.shippingNote) { $("ship-note").textContent = S.shippingNote; $("ship-note").hidden = false; }
+    if (S.privacyNote) { $("privacy-note").textContent = S.privacyNote; $("privacy-note").hidden = false; }
+    if (S.address) { $("footer-info").textContent = S.address; $("footer-info").hidden = false; }
+
+    var contacts = [];
+    if (PHONE) contacts.push(["電話", h("a", { href: "tel:" + PHONE.replace(/[^\d+]/g, ""), text: PHONE })]);
+    if (LINE_OA_ID) contacts.push(["LINE", h("a", { href: "https://line.me/R/ti/p/" + encodeURIComponent(LINE_OA_ID), target: "_blank", rel: "noopener", text: LINE_OA_ID })]);
+    if (ORDER_EMAIL) contacts.push(["Email", h("a", { href: "mailto:" + ORDER_EMAIL, text: ORDER_EMAIL })]);
+    if (contacts.length) {
+        var cl = $("contact-line");
+        cl.appendChild(document.createTextNode("也可以直接聯絡我們:"));
+        contacts.forEach(function (c, i) {
+            if (i) cl.appendChild(document.createTextNode("、"));
+            cl.appendChild(document.createTextNode(c[0] + " "));
+            cl.appendChild(c[1]);
+        });
+        cl.hidden = false;
     }
 
     $("btn-copy").addEventListener("click", function () {
