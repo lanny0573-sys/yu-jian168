@@ -76,6 +76,6 @@ window.PRODUCTS = [
       11,
       12
     ],
-    "seasonNote": "11 月至隔年 1 月採收"
+    "seasonNote": "11 月至12月採收"
   }
 ];
